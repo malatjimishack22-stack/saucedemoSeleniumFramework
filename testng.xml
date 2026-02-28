@@ -8,8 +8,7 @@
     <test name="RegressionTests">
         <!--<parameter name="browser" value="CHROME"/>-->
         <classes>
-            <class name="com.saucedemo.tests.login.LoginTest"/>
-            <class name="com.saucedemo.tests.products.LoginTest"/>
+            <class name="com.saucedemo.tests.LoginTests"/>
         </classes>
     </test>
 
