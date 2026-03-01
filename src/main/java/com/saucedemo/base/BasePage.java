@@ -1,6 +1,6 @@
 package com.saucedemo.base;
 
-import com.saucedemo.driver.DriverManager;
+import com.saucedemo.elements.Element;
 import com.saucedemo.reports.ReportLogger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,8 +21,8 @@ public class BasePage {
 
     private static final int DEFAULT_TIMEOUT = 10;
 
-    public BasePage() {
-        this.driver = DriverManager.getDriver();
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT));
         this.actions = new Actions(driver);
         this.jsExecutor = (JavascriptExecutor) driver;
@@ -36,43 +36,43 @@ public class BasePage {
     }
 
     //Click element safely
-    public void click(By locator) {
+    public void click(Element element) {
         try {
-            waitUntilClickable(locator).click();
-            log.info("Clicked element: {}", locator);
-            ReportLogger.info("Clicked element: " + locator);
+            waitUntilClickable(element.getLocator()).click();
+            log.info("Clicked {}", element.getName());
+            ReportLogger.info("Clicked " + element.getName());
         } catch (Exception e) {
-            log.error("Failed to click element: {}", locator, e);
-            ReportLogger.fail("Failed to click element: " + locator + " - " + e.getMessage());
+            log.error("Failed to click element: {}", element.getLocator(), e);
+            ReportLogger.fail("Failed to click element: " + element.getLocator() + " - " + e.getMessage());
             throw e;
         }
     }
 
     //Type into an input
-    public void type(By locator, String text) {
+    public void type(Element element, String text) {
         try {
-            WebElement element = waitUntilVisible(locator);
-            element.clear();
-            element.sendKeys(text);
-            log.info("Typed '{}' into: {}", text, locator);
-            ReportLogger.info("Typed '" + text + "' into: " + locator);
+            WebElement _element = waitUntilVisible(element.getLocator());
+            _element.clear();
+            _element.sendKeys(text);
+            log.info("Typed '{}' into {}", text, element.getName());
+            ReportLogger.info("Typed '" + text + "' into " + element.getName());
         } catch (Exception e) {
-            log.error("Failed to type into element: {}", locator, e);
-            ReportLogger.fail("Failed to type into element: " + locator + " - " + e.getMessage());
+            log.error("Failed to type into element: {}", element.getLocator(), e);
+            ReportLogger.fail("Failed to type into element: " + element.getLocator() + " - " + e.getMessage());
             throw e;
         }
     }
 
     //Get element text
-    public String getText(By locator) {
+    public String getText(Element element) {
         try {
-            String text = waitUntilVisible(locator).getText();
-            log.info("Got text from element: {} -> {}", locator, text);
-            ReportLogger.info("Got text from element: " + locator + " -> " + text);
+            String text = waitUntilVisible(element.getLocator()).getText();
+            log.info("Got text {} from {}", text, element.getName());
+            ReportLogger.info("Got text "+text+" from " + element.getName());
             return text;
         } catch (Exception e) {
-            log.error("Failed to get text from element: {}", locator, e);
-            ReportLogger.fail("Failed to get text from element: " + locator + " - " + e.getMessage());
+            log.error("Failed to get text from element: {}", element.getLocator(), e);
+            ReportLogger.fail("Failed to get text from element: " + element.getLocator() + " - " + e.getMessage());
             throw e;
         }
     }
@@ -88,9 +88,9 @@ public class BasePage {
     }
 
     //Check if element is displayed
-    public boolean isDisplayed(By locator) {
+    public boolean isDisplayed(Element element) {
         try {
-            return waitUntilVisible(locator).isDisplayed();
+            return waitUntilVisible(element.getLocator()).isDisplayed();
         } catch (TimeoutException e) {
             return false;
         }
@@ -109,11 +109,11 @@ public class BasePage {
     }
 
     //Scroll to element
-    public void scrollTo(By locator) {
-        WebElement element = waitUntilVisible(locator);
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
-        log.info("Scrolled to element: {}", locator);
-        ReportLogger.info("Scrolled to element: " + locator);
+    public void scrollTo(Element element) {
+        WebElement _element = waitUntilVisible(element.getLocator());
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", _element);
+        log.info("Scrolled to : {}", element.getName());
+        ReportLogger.info("Scrolled to : " + element.getName());
     }
 
     //Scroll by pixels
@@ -124,44 +124,44 @@ public class BasePage {
     }
 
     //Click element using JavaScript
-    public void clickJS(By locator) {
-        WebElement element = waitUntilVisible(locator);
-        jsExecutor.executeScript("arguments[0].click();", element);
-        log.info("Clicked element using JS: {}", locator);
-        ReportLogger.info("Clicked element using JS: " + locator);
+    public void clickJS(Element element) {
+        WebElement _element = waitUntilVisible(element.getLocator());
+        jsExecutor.executeScript("arguments[0].click();", _element);
+        log.info("Clicked {}", element.getName());
+        ReportLogger.info("Clicked "+ element.getName() );
     }
 
     //Hover over element
-    public void hover(By locator) {
-        WebElement element = waitUntilVisible(locator);
-        actions.moveToElement(element).perform();
-        log.info("Hovered over element: {}", locator);
-        ReportLogger.info("Hovered over element: " + locator);
+    public void hover(Element element) {
+        WebElement _element = waitUntilVisible(element.getLocator());
+        actions.moveToElement(_element).perform();
+        log.info("Hovered over : {}", element.getName());
+        ReportLogger.info("Hovered over : " + element.getName());
     }
 
     //Double click element
-    public void doubleClick(By locator) {
-        WebElement element = waitUntilVisible(locator);
-        actions.doubleClick(element).perform();
-        log.info("Double clicked element: {}", locator);
-        ReportLogger.info("Double clicked element: " + locator);
+    public void doubleClick(Element element) {
+        WebElement _element = waitUntilVisible(element.getLocator());
+        actions.doubleClick(_element).perform();
+        log.info("Double clicked : {}", element.getName());
+        ReportLogger.info("Double clicked : " + element.getName());
     }
 
     //Right click (context click) element
-    public void rightClick(By locator) {
-        WebElement element = waitUntilVisible(locator);
-        actions.contextClick(element).perform();
-        log.info("Right clicked element: {}", locator);
-        ReportLogger.info("Right clicked element: " + locator);
+    public void rightClick(Element element) {
+        WebElement _element = waitUntilVisible(element.getLocator());
+        actions.contextClick(_element).perform();
+        log.info("Right clicked : {}", element.getName());
+        ReportLogger.info("Right clicked : " + element.getName());
     }
 
     //Drag element to target
-    public void dragAndDrop(By sourceLocator, By targetLocator) {
-        WebElement source = waitUntilVisible(sourceLocator);
-        WebElement target = waitUntilVisible(targetLocator);
+    public void dragAndDrop(Element sourceElement, Element targetElement) {
+        WebElement source = waitUntilVisible(sourceElement.getLocator());
+        WebElement target = waitUntilVisible(targetElement.getLocator());
         actions.dragAndDrop(source, target).perform();
-        log.info("Dragged element: {} to {}", sourceLocator, targetLocator);
-        ReportLogger.info("Dragged element: " + sourceLocator + " to " + targetLocator);
+        log.info("Dragged : {} to {}", sourceElement.getName(), targetElement.getName());
+        ReportLogger.info("Dragged : " + sourceElement.getName() + " to " + targetElement.getName());
     }
 
     //Sleep utility (use sparingly)

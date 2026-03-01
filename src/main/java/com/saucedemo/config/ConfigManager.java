@@ -1,5 +1,7 @@
 package com.saucedemo.config;
 
+import com.saucedemo.enums.ScreenshotMode;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -75,5 +77,11 @@ public class ConfigManager {
 
     public String getReportPath() {
         return getProperty("reportPath", "./test-results/extent-report.html");
+    }
+
+    public ScreenshotMode getScreenshotMode() {
+        return ScreenshotMode.valueOf(
+                getProperty("screenshotMode", "FAILED").toUpperCase()
+        );
     }
 }
