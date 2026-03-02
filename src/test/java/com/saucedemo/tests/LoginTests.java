@@ -11,8 +11,6 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginTests extends BaseTest {
 
-    private final Logger log = LogManager.getLogger(this);
-
     @Test
     public void validLogin() {
         LoginPage loginPage = new LoginPage(DriverManager.getDriver());
