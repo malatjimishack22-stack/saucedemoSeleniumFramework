@@ -1,0 +1,5 @@
+username     ,password    ,expectedOutcome,expectedMessage
+standard_user,secret_sauce,SUCCESS        ,
+wrong        ,secret_sauce,ERROR          ,Username and password do not match any user in this service
+             ,secret_sauce,ERROR          ,Username is required
+wrong        ,            ,ERROR          ,Password is required
