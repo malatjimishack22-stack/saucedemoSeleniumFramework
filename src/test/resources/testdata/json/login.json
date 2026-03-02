@@ -1,0 +1,26 @@
+[
+  {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "expectedOutcome": "SUCCESS",
+    "expectedMessage": ""
+  },
+  {
+    "username": "wrong",
+    "password": "secret_sauce",
+    "expectedOutcome": "ERROR",
+    "expectedMessage": "Username and password do not match any user in this service"
+  },
+  {
+    "username": "",
+    "password": "secret_sauce",
+    "expectedOutcome": "ERROR",
+    "expectedMessage": "Username is required"
+  },
+  {
+    "username": "wrong",
+    "password": "",
+    "expectedOutcome": "ERROR",
+    "expectedMessage": "Password is required"
+  }
+]
