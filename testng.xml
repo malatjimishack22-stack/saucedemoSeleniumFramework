@@ -11,6 +11,7 @@
             <class name="com.saucedemo.tests.LoginTests"/>
             <class name="com.saucedemo.tests.LoginDataDrivenCSVTests"/>
             <class name="com.saucedemo.tests.LoginDataDrivenJSONTests"/>
+            <class name="com.saucedemo.tests.ProductsPageTests"/>
         </classes>
     </test>
 
