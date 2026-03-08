@@ -1,0 +1,6 @@
+username     ,password    ,products                                                                                                    ,removeProducts
+standard_user,secret_sauce,Sauce Labs Bolt T-Shirt                                                                                     ,Sauce Labs Bolt T-Shirt
+standard_user,secret_sauce,Sauce Labs Bolt T-Shirt|Sauce Labs Onesie                                                                   ,Sauce Labs Onesie
+standard_user,secret_sauce,Sauce Labs Bolt T-Shirt|Sauce Labs Onesie|Sauce Labs Fleece Jacket                                          ,Sauce Labs Bolt T-Shirt|Sauce Labs Onesie
+standard_user,secret_sauce,Sauce Labs Bolt T-Shirt|Sauce Labs Onesie|Sauce Labs Fleece Jacket|Sauce Labs Backpack                      ,Sauce Labs Onesie|Sauce Labs Fleece Jacket
+standard_user,secret_sauce,Sauce Labs Bolt T-Shirt|Sauce Labs Onesie|Sauce Labs Fleece Jacket|Sauce Labs Backpack|Sauce Labs Bike Light,Sauce Labs Fleece Jacket|Sauce Labs Backpack|Sauce Labs Bike Light

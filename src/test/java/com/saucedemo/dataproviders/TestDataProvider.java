@@ -15,6 +15,16 @@ public class TestDataProvider {
         return CsvDataReader.read("src/test/resources/testdata/csv/login.csv");
     }
 
+    @DataProvider(name = "addProductsToCartCSVTestData", parallel = true)
+    public static Object[][] addProductsToCartCSVTestData() {
+        return CsvDataReader.read("src/test/resources/testdata/csv/addProductsToCart.csv");
+    }
+
+    @DataProvider(name = "removeProductsFromCartCSVTestData", parallel = true)
+    public static Object[][] removeProductsFromCartCSVTestData() {
+        return CsvDataReader.read("src/test/resources/testdata/csv/removeProductsFromCart.csv");
+    }
+
     //Json
     @DataProvider(name = "loginJsonData", parallel = true)
     public static Object[][] loginJsonData() {

@@ -19,4 +19,5 @@ public class Element {
     public By getLocator() {
         return locator;
     }
+
 }

@@ -23,7 +23,7 @@ public class LoginDataDrivenCSVTests extends BaseTest {
         LoginPage loginPage = new LoginPage(DriverManager.getDriver());
 
         log.info("Executing login test for {}", data.get("expectedOutcome"));
-        ReportLogger.info("Executing login test for " + data.get("expectedOutcome"));
+        ReportLogger.infoBold("Executing login test for " + data.get("expectedOutcome"));
 
         loginPage.login(data.get("username"), data.get("password"));
 

@@ -19,6 +19,13 @@ public final class ReportLogger {
         }
     }
 
+    public static void infoBold(String message) {
+        ExtentTest test = ExtentManager.getTest();
+        if (test != null) {
+            test.info("<b>" + message + "</b>");
+        }
+    }
+
     public static void pass(String message) {
         ExtentTest test = ExtentManager.getTest();
         if (test != null) {
